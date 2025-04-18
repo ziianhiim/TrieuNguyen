@@ -9,11 +9,11 @@
       font-family: sans-serif;
       margin: 0;
       padding: 0;
-      background: #e6f7f1; /* xanh pastel nền */
+      background: #e6f7f1;
     }
 
     .header, .footer {
-      background-color: #d0f0e0; /* xanh pastel nhẹ */
+      background-color: #d0f0e0;
       text-align: center;
       padding: 20px 10px;
       color: #006666;
@@ -56,15 +56,15 @@
     }
 
     .dish-list li.selected {
-      background-color: #a0eac5; /* màu khi chọn món */
+      background-color: #a0eac5;
       font-weight: bold;
     }
 
     .selected-count {
       position: fixed;
-      bottom: 100px;
+      bottom: 120px;
       right: 20px;
-      background: #00b38f; /* xanh pastel đậm hơn */
+      background: #00b38f;
       color: white;
       padding: 10px 20px;
       border: none;
@@ -87,9 +87,11 @@
       overflow-y: auto;
       z-index: 999;
       border-radius: 10px;
-    }
+}
 
-    .copy-button, .send-zalo-button {
+  .copy-button {
+    display: block;
+    margin: 10px auto;
       background: #00a67c;
       color: white;
       padding: 6px 12px;
@@ -97,10 +99,6 @@
       border: none;
       cursor: pointer;
       border-radius: 6px;
-    }
-
-    .send-zalo-button {
-      background: #0077cc; /* màu khác cho nút gửi Zalo */
     }
 
     .copy-text {
@@ -129,7 +127,7 @@
 </div>
 
 <!-- PHẦN MÓN ĂN -->
-  <div class="section">
+<div class="section">
   <h2>Món Khai Vị</h2>
   <div class="dish-list">
     <ul>
@@ -165,7 +163,7 @@
   </div>
 </div>
 
-  <div class="section">
+<div class="section">
   <h2>Món Lẩu</h2>
   <div class="dish-list">
     <ul>
@@ -187,14 +185,14 @@
   <h2>Món Bạn Đã Chọn:</h2>
   <ul id="selectedDishes"></ul>
   <button class="copy-button" onclick="copyToClipboard()">Sao Chép</button>
-  <button class="send-zalo-button" onclick="sendViaZalo()">Gửi Qua Zalo</button>
-  <div class="copy-text">Gửi danh sách món qua Zalo/Facebook để được báo giá nhé!</div>
+  <div class="copy-text">Sao chép và gửi danh sách món qua Zalo/Facebook để được báo giá nhé!</div>
 </div>
 
 <div class="footer">
   Kết nối với chúng tôi qua <b>Zalo</b> hoặc <b>Facebook</b>: <br>
   <a href="https://zalo.me/0927754416" target="_blank">Zalo Triệu Nguyễn</a> |
-  <a href="https://m.facebook.com/100015019895447/" target="_blank">Facebook Triệu Nguyễn</a>
+  <a href="https://facebook.com/your-page" target="_blank">Facebook Triệu Nguyễn</a> |
+  <a href="https://zalo.me/0944854837" target="_blank">Zalo Ly Nguyễn</a> 
 </div>
 
 <script>
@@ -250,13 +248,6 @@
     document.body.removeChild(textarea);
     alert('Đã sao chép danh sách món!');
   }
-
-  function sendViaZalo() {
-  const text = selectedDishes.join('\n');
-  const encodedText = encodeURIComponent(text);
-  const zaloUrl = `https://zalo.me/0927754416?message=${encodedText}`;
-  window.open(zaloUrl, '_blank');
-}
 </script>
 
 </body>
