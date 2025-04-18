@@ -87,11 +87,11 @@
       overflow-y: auto;
       z-index: 999;
       border-radius: 10px;
-}
+    }
 
-  .copy-button {
-    display: block;
-    margin: 10px auto;
+    .copy-button {
+      display: block;
+      margin: 10px auto;
       background: #00a67c;
       color: white;
       padding: 6px 12px;
@@ -102,7 +102,7 @@
     }
 
     .copy-text {
-      font-size: 14px;
+      font-size: 15px;
       margin-top: 10px;
       color: #006666;
     }
@@ -114,141 +114,150 @@
       background: rgba(0, 0, 0, 0.3);
       z-index: 998;
     }
+
+    /* Thêm style cho dòng "Sao chép và gửi danh sách món..." */
+    .copy-info {
+      font-size: 15px;
+      color: #006666;
+      margin-top: 15px;
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>Dịch vụ nấu ăn <span style="color: red; font-weight: bold;">Triệu Nguyễn</span></h1>
-  <div class="info">
-    0927 754 416 - 0944 854 837<br>
-    Ấp 4, Xã Quê Mỹ Thạnh, Tân Trụ, Long An
+  <div class="header">
+    <h1>Dịch vụ nấu ăn <span style="color: red; font-weight: bold;">Triệu Nguyễn</span></h1>
+    <div class="info">
+      0927 754 416 - 0944 854 837<br>
+      Ấp 4, Xã Quê Mỹ Thạnh, Tân Trụ, Long An
+    </div>
   </div>
-</div>
 
-<!-- PHẦN MÓN ĂN -->
-<div class="section">
-  <h2>Món Khai Vị</h2>
-  <div class="dish-list">
-    <ul>
-      <li onclick="toggleSelection(this)">Gỏi cuốn</li>
-      <li onclick="toggleSelection(this)">Chả giò</li>
-      <li onclick="toggleSelection(this)">Súp cua</li>
-      <li onclick="toggleSelection(this)">Bánh xèo</li>
-    </ul>
+  <!-- PHẦN MÓN ĂN -->
+  <div class="section">
+    <h2>Món Khai Vị</h2>
+    <div class="dish-list">
+      <ul>
+        <li onclick="toggleSelection(this)">Gỏi cuốn</li>
+        <li onclick="toggleSelection(this)">Chả giò</li>
+        <li onclick="toggleSelection(this)">Súp cua</li>
+        <li onclick="toggleSelection(this)">Bánh xèo</li>
+      </ul>
+    </div>
   </div>
-</div>
 
-<div class="section">
-  <h2>Món Bò</h2>
-  <div class="dish-list">
-    <ul>
-      <li onclick="toggleSelection(this)">Bò lúc lắc</li>
-      <li onclick="toggleSelection(this)">Bò né chảo nóng</li>
-      <li onclick="toggleSelection(this)">Bò cuộn phô mai</li>
-      <li onclick="toggleSelection(this)">Bò kho gừng</li>
-    </ul>
+  <div class="section">
+    <h2>Món Bò</h2>
+    <div class="dish-list">
+      <ul>
+        <li onclick="toggleSelection(this)">Bò lúc lắc</li>
+        <li onclick="toggleSelection(this)">Bò né chảo nóng</li>
+        <li onclick="toggleSelection(this)">Bò cuộn phô mai</li>
+        <li onclick="toggleSelection(this)">Bò kho gừng</li>
+      </ul>
+    </div>
   </div>
-</div>
 
-<div class="section">
-  <h2>Món Gà</h2>
-  <div class="dish-list">
-    <ul>
-      <li onclick="toggleSelection(this)">Gà xào sả ớt</li>
-      <li onclick="toggleSelection(this)">Gà hấp lá chanh</li>
-      <li onclick="toggleSelection(this)">Gà bó xôi</li>
-      <li onclick="toggleSelection(this)">Gà nướng mật ong</li>
-    </ul>
+  <div class="section">
+    <h2>Món Gà</h2>
+    <div class="dish-list">
+      <ul>
+        <li onclick="toggleSelection(this)">Gà xào sả ớt</li>
+        <li onclick="toggleSelection(this)">Gà hấp lá chanh</li>
+        <li onclick="toggleSelection(this)">Gà bó xôi</li>
+        <li onclick="toggleSelection(this)">Gà nướng mật ong</li>
+      </ul>
+    </div>
   </div>
-</div>
 
-<div class="section">
-  <h2>Món Lẩu</h2>
-  <div class="dish-list">
-    <ul>
-      <li onclick="toggleSelection(this)">Lẩu Thái</li>
-      <li onclick="toggleSelection(this)">Lẩu gà lá é</li>
-      <li onclick="toggleSelection(this)">Lẩu cá kèo</li>
-      <li onclick="toggleSelection(this)">Lẩu bò</li>
-    </ul>
+  <div class="section">
+    <h2>Món Lẩu</h2>
+    <div class="dish-list">
+      <ul>
+        <li onclick="toggleSelection(this)">Lẩu Thái</li>
+        <li onclick="toggleSelection(this)">Lẩu gà lá é</li>
+        <li onclick="toggleSelection(this)">Lẩu cá kèo</li>
+        <li onclick="toggleSelection(this)">Lẩu bò</li>
+      </ul>
+    </div>
   </div>
-</div>
 
-<!-- Nút hiển thị số món đã chọn -->
-<button class="selected-count" onclick="toggleResultBox()">0 Món</button>
+  <!-- Nút hiển thị số món đã chọn -->
+  <button class="selected-count" onclick="toggleResultBox()">0 Món</button>
 
-<div class="overlay" onclick="closeResultBox()"></div>
+  <div class="overlay" onclick="closeResultBox()"></div>
 
-<!-- Hộp kết quả món đã chọn -->
-<div class="result-box" id="resultBox">
-  <h2>Món Bạn Đã Chọn:</h2>
+  <!-- Hộp kết quả món đã chọn -->
+  <<div class="result-box" id="resultBox">
+  <h2 style="text-align: center;">Món Bạn Đã Chọn:</h2>
   <ul id="selectedDishes"></ul>
   <button class="copy-button" onclick="copyToClipboard()">Sao Chép</button>
-  <div class="copy-text">Sao chép và gửi danh sách món qua Zalo/Facebook để được báo giá nhé!</div>
+  <div class="copy-info">Sao chép và gửi danh sách món qua Zalo/Facebook để được báo giá nhé!</div>
 </div>
 
-<div class="footer">
-  Kết nối với chúng tôi qua <b>Zalo</b> hoặc <b>Facebook</b>: <br>
-  <a href="https://zalo.me/0927754416" target="_blank">Zalo Triệu Nguyễn</a> |
-  <a href="https://facebook.com/your-page" target="_blank">Facebook Triệu Nguyễn</a> |
-  <a href="https://zalo.me/0944854837" target="_blank">Zalo Ly Nguyễn</a> 
-</div>
+  <div class="footer">
+    Kết nối với chúng tôi qua <b>Zalo</b> hoặc <b>Facebook</b>: <br>
+    <a href="https://zalo.me/0927754416" target="_blank">Zalo Triệu Nguyễn</a> |   
+    <a href="https://facebook.com/your-page" target="_blank">Facebook Triệu Nguyễn</a> |   
+    <a href="https://zalo.me/0944854837" target="_blank">Zalo Ly Nguyễn</a>
+  </div>
 
-<script>
-  let selectedDishes = [];
+  <script>
+    let selectedDishes = [];
 
-  function toggleSelection(dish) {
-    const dishName = dish.innerText.trim();
-    dish.classList.toggle('selected');
+    function toggleSelection(dish) {
+      const dishName = dish.innerText.trim();
+      dish.classList.toggle('selected');
 
-    if (dish.classList.contains('selected')) {
-      selectedDishes.push(dishName);
-    } else {
-      selectedDishes = selectedDishes.filter(item => item !== dishName);
+      if (dish.classList.contains('selected')) {
+        selectedDishes.push(dishName);
+      } else {
+        selectedDishes = selectedDishes.filter(item => item !== dishName);
+      }
+
+      document.querySelector('.selected-count').innerText = `${selectedDishes.length} Món Đã Chọn`;
     }
 
-    document.querySelector('.selected-count').innerText = `${selectedDishes.length} Món Đã Chọn`;
-  }
+    function toggleResultBox() {
+      const resultBox = document.getElementById('resultBox');
+      const overlay = document.querySelector('.overlay');
+      const isVisible = resultBox.style.display === 'block';
+      resultBox.style.display = isVisible ? 'none' : 'block';
+      overlay.style.display = isVisible ? 'none' : 'block';
 
-  function toggleResultBox() {
-    const resultBox = document.getElementById('resultBox');
-    const overlay = document.querySelector('.overlay');
-    const isVisible = resultBox.style.display === 'block';
-    resultBox.style.display = isVisible ? 'none' : 'block';
-    overlay.style.display = isVisible ? 'none' : 'block';
-
-    if (!isVisible) {
-      updateSelectedDishes();
+      if (!isVisible) {
+        updateSelectedDishes();
+      }
     }
-  }
 
-  function closeResultBox() {
-    document.getElementById('resultBox').style.display = 'none';
-    document.querySelector('.overlay').style.display = 'none';
-  }
+    function closeResultBox() {
+      document.getElementById('resultBox').style.display = 'none';
+      document.querySelector('.overlay').style.display = 'none';
+    }
 
-  function updateSelectedDishes() {
-    const selectedDishesList = document.getElementById('selectedDishes');
-    selectedDishesList.innerHTML = '';
-    selectedDishes.forEach(dish => {
-      const li = document.createElement('li');
-      li.innerText = dish;
-      selectedDishesList.appendChild(li);
-    });
-  }
+    function updateSelectedDishes() {
+      const selectedDishesList = document.getElementById('selectedDishes');
+      selectedDishesList.innerHTML = '';
+      selectedDishes.forEach(dish => {
+        const li = document.createElement('li');
+        li.innerText = dish;
+        selectedDishesList.appendChild(li);
+      });
+    }
 
-  function copyToClipboard() {
-    const text = selectedDishes.join('\n');
-    const textarea = document.createElement('textarea');
-    document.body.appendChild(textarea);
-    textarea.value = text;
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-    alert('Đã sao chép danh sách món!');
-  }
-</script>
+    function copyToClipboard() {
+      const text = selectedDishes.join('\n');
+      const textarea = document.createElement('textarea');
+      document.body.appendChild(textarea);
+      textarea.value = text;
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      alert('Đã sao chép danh sách món!');
+    }
+  </script>
 
 </body>
 </html>
