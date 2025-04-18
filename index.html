@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dịch vụ nấu ăn Triệu Nguyễn</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e6f7f1; /* xanh pastel nền */
+    }
+
+    .header, .footer {
+      background-color: #d0f0e0; /* xanh pastel nhẹ */
+      text-align: center;
+      padding: 20px 10px;
+      color: #006666;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .header .info, .footer {
+      font-size: 16px;
+    }
+
+    .section {
+      padding: 16px;
+      border-bottom: 2px solid #b3e6d6;
+    }
+
+    .section h2 {
+      text-align: center;
+      color: #009999;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    .dish-list {
+      padding-left: 20px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .dish-list li {
+      margin-bottom: 6px;
+      padding: 6px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    .dish-list li.selected {
+      background-color: #a0eac5; /* màu khi chọn món */
+      font-weight: bold;
+    }
+
+    .selected-count {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      background: #00b38f; /* xanh pastel đậm hơn */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .result-box {
+      display: none;
+      position: fixed;
+      bottom: 280px;
+      right: 20px;
+      background: #ffffff;
+      border: 2px solid #7cd6b2;
+      padding: 20px;
+      max-width: 300px;
+      max-height: 400px;
+      overflow-y: auto;
+      z-index: 999;
+      border-radius: 10px;
+    }
+
+    .copy-button, .send-zalo-button {
+      background: #00a67c;
+      color: white;
+      padding: 6px 12px;
+      margin-top: 10px;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .send-zalo-button {
+      background: #0077cc; /* màu khác cho nút gửi Zalo */
+    }
+
+    .copy-text {
+      font-size: 14px;
+      margin-top: 10px;
+      color: #006666;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 998;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Dịch vụ nấu ăn <span style="color: red; font-weight: bold;">Triệu Nguyễn</span></h1>
+  <div class="info">
+    0927 754 416 - 0944 854 837<br>
+    Ấp 4, Xã Quê Mỹ Thạnh, Tân Trụ, Long An
+  </div>
+</div>
+
+<!-- PHẦN MÓN ĂN -->
+  <div class="section">
+  <h2>Món Khai Vị</h2>
+  <div class="dish-list">
+    <ul>
+      <li onclick="toggleSelection(this)">Gỏi cuốn</li>
+      <li onclick="toggleSelection(this)">Chả giò</li>
+      <li onclick="toggleSelection(this)">Súp cua</li>
+      <li onclick="toggleSelection(this)">Bánh xèo</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Món Bò</h2>
+  <div class="dish-list">
+    <ul>
+      <li onclick="toggleSelection(this)">Bò lúc lắc</li>
+      <li onclick="toggleSelection(this)">Bò né chảo nóng</li>
+      <li onclick="toggleSelection(this)">Bò cuộn phô mai</li>
+      <li onclick="toggleSelection(this)">Bò kho gừng</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Món Gà</h2>
+  <div class="dish-list">
+    <ul>
+      <li onclick="toggleSelection(this)">Gà xào sả ớt</li>
+      <li onclick="toggleSelection(this)">Gà hấp lá chanh</li>
+      <li onclick="toggleSelection(this)">Gà bó xôi</li>
+      <li onclick="toggleSelection(this)">Gà nướng mật ong</li>
+    </ul>
+  </div>
+</div>
+
+  <div class="section">
+  <h2>Món Lẩu</h2>
+  <div class="dish-list">
+    <ul>
+      <li onclick="toggleSelection(this)">Lẩu Thái</li>
+      <li onclick="toggleSelection(this)">Lẩu gà lá é</li>
+      <li onclick="toggleSelection(this)">Lẩu cá kèo</li>
+      <li onclick="toggleSelection(this)">Lẩu bò</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Nút hiển thị số món đã chọn -->
+<button class="selected-count" onclick="toggleResultBox()">0 Món</button>
+
+<div class="overlay" onclick="closeResultBox()"></div>
+
+<!-- Hộp kết quả món đã chọn -->
+<div class="result-box" id="resultBox">
+  <h2>Món Bạn Đã Chọn:</h2>
+  <ul id="selectedDishes"></ul>
+  <button class="copy-button" onclick="copyToClipboard()">Sao Chép</button>
+  <button class="send-zalo-button" onclick="sendViaZalo()">Gửi Qua Zalo</button>
+  <div class="copy-text">Gửi danh sách món qua Zalo/Facebook để được báo giá nhé!</div>
+</div>
+
+<div class="footer">
+  Kết nối với chúng tôi qua <b>Zalo</b> hoặc <b>Facebook</b>: <br>
+  <a href="https://zalo.me/0927754416" target="_blank">Zalo Triệu Nguyễn</a> |
+  <a href="https://m.facebook.com/100015019895447/" target="_blank">Facebook Triệu Nguyễn</a>
+</div>
+
+<script>
+  let selectedDishes = [];
+
+  function toggleSelection(dish) {
+    const dishName = dish.innerText.trim();
+    dish.classList.toggle('selected');
+
+    if (dish.classList.contains('selected')) {
+      selectedDishes.push(dishName);
+    } else {
+      selectedDishes = selectedDishes.filter(item => item !== dishName);
+    }
+
+    document.querySelector('.selected-count').innerText = `${selectedDishes.length} Món Đã Chọn`;
+  }
+
+  function toggleResultBox() {
+    const resultBox = document.getElementById('resultBox');
+    const overlay = document.querySelector('.overlay');
+    const isVisible = resultBox.style.display === 'block';
+    resultBox.style.display = isVisible ? 'none' : 'block';
+    overlay.style.display = isVisible ? 'none' : 'block';
+
+    if (!isVisible) {
+      updateSelectedDishes();
+    }
+  }
+
+  function closeResultBox() {
+    document.getElementById('resultBox').style.display = 'none';
+    document.querySelector('.overlay').style.display = 'none';
+  }
+
+  function updateSelectedDishes() {
+    const selectedDishesList = document.getElementById('selectedDishes');
+    selectedDishesList.innerHTML = '';
+    selectedDishes.forEach(dish => {
+      const li = document.createElement('li');
+      li.innerText = dish;
+      selectedDishesList.appendChild(li);
+    });
+  }
+
+  function copyToClipboard() {
+    const text = selectedDishes.join('\n');
+    const textarea = document.createElement('textarea');
+    document.body.appendChild(textarea);
+    textarea.value = text;
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    alert('Đã sao chép danh sách món!');
+  }
+
+  function sendViaZalo() {
+  const text = selectedDishes.join('\n');
+  const encodedText = encodeURIComponent(text);
+  const zaloUrl = `https://zalo.me/0927754416?message=${encodedText}`;
+  window.open(zaloUrl, '_blank');
+}
+</script>
+
+</body>
+</html>
