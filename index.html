@@ -87,6 +87,7 @@
       overflow-y: auto;
       z-index: 999;
       border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     .copy-button {
@@ -115,14 +116,12 @@
       z-index: 998;
     }
 
-    /* Thêm style cho dòng "Sao chép và gửi danh sách món..." */
     .copy-info {
       font-size: 15px;
       color: #006666;
       margin-top: 15px;
       text-align: center;
     }
-
   </style>
 </head>
 <body>
@@ -173,6 +172,47 @@
   </div>
 
   <div class="section">
+    <h2>Súp – cháo</h2>
+    <div class="dish-list">
+      <ul>
+        <li onclick="toggleSelection(this)">Súp hải sản</li>
+        <li onclick="toggleSelection(this)">Cháo hải sản</li>
+        <li onclick="toggleSelection(this)">Cháo gà ri</li>
+        <li onclick="toggleSelection(this)">Cháo cá lóc</li>
+        <li onclick="toggleSelection(this)">Cơm chiên hải sản</li>
+        <li onclick="toggleSelection(this)">Cơm chiên dương châu</li>
+        <li onclick="toggleSelection(this)">Cơm chiên cá mặn</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Heo</h2>
+    <div class="dish-list">
+      <ul>
+        <li onclick="toggleSelection(this)">Bao tử</li>
+        <li onclick="toggleSelection(this)">lưỡi nấu tiêu</li>
+        <li onclick="toggleSelection(this)">Giò heo chiên giòn</li>
+        <li onclick="toggleSelection(this)">Heo sữa quay</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Cá</h2>
+    <div class="dish-list">
+      <ul>
+        <li onclick="toggleSelection(this)">Cá chẻm hấp HK</li>
+        <li onclick="toggleSelection(this)">Cá bống mú hấp HK</li>
+        <li onclick="toggleSelection(this)">Cá chẻm sốt chua ngọt</li>
+        <li onclick="toggleSelection(this)">Cá tai tượng chiên xù</li>
+        <li onclick="toggleSelection(this)">sốt bánh tráng</li>
+        <li onclick="toggleSelection(this)">Cá diêu hồng chiên xù</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
     <h2>Món Lẩu</h2>
     <div class="dish-list">
       <ul>
@@ -184,23 +224,38 @@
     </div>
   </div>
 
+  <div class="section">
+    <h2>Tráng miệng</h2>
+    <div class="dish-list">
+      <ul>
+        <li onclick="toggleSelection(this)">Sữa chua trái cây</li>
+        <li onclick="toggleSelection(this)">Nho</li>
+        <li onclick="toggleSelection(this)">Rau câu</li>
+        <li onclick="toggleSelection(this)">Trái cây thập cẩm</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- Nút hiển thị số món đã chọn -->
-  <button class="selected-count" onclick="toggleResultBox()">0 Món</button>
+  <button class="selected-count" onclick="toggleResultBox()">0 Món Đã Chọn</button>
 
   <div class="overlay" onclick="closeResultBox()"></div>
 
   <!-- Hộp kết quả món đã chọn -->
-  <<div class="result-box" id="resultBox">
-  <h2 style="text-align: center;">Món Bạn Đã Chọn:</h2>
-  <ul id="selectedDishes"></ul>
-  <button class="copy-button" onclick="copyToClipboard()">Sao Chép</button>
-  <div class="copy-info">Sao chép và gửi danh sách món qua Zalo/Facebook để được báo giá nhé!</div>
-</div>
+  <div class="result-box" id="resultBox">
+    <div style="text-align: right;">
+      <button onclick="closeResultBox()" style="background: none; border: none; font-size: 20px; cursor: pointer;">×</button>
+    </div>
+    <h2 style="text-align: center;">Món Bạn Đã Chọn:</h2>
+    <ul id="selectedDishes"></ul>
+    <button class="copy-button" onclick="copyToClipboard()">Sao Chép</button>
+    <div class="copy-info">Sao chép và gửi danh sách món qua Zalo/Facebook để được báo giá nhé!</div>
+  </div>
 
   <div class="footer">
     Kết nối với chúng tôi qua <b>Zalo</b> hoặc <b>Facebook</b>: <br>
-    <a href="https://zalo.me/0927754416" target="_blank">Zalo Triệu Nguyễn</a> |   
-    <a href="https://facebook.com/your-page" target="_blank">Facebook Triệu Nguyễn</a> |   
+    <a href="https://zalo.me/0927754416" target="_blank">Zalo Triệu Nguyễn</a> |   
+    <a href="https://facebook.com/your-page" target="_blank">Facebook Triệu Nguyễn</a> |   
     <a href="https://zalo.me/0944854837" target="_blank">Zalo Ly Nguyễn</a>
   </div>
 
@@ -223,9 +278,12 @@
     function toggleResultBox() {
       const resultBox = document.getElementById('resultBox');
       const overlay = document.querySelector('.overlay');
+      const selectedCountBtn = document.querySelector('.selected-count');
       const isVisible = resultBox.style.display === 'block';
+
       resultBox.style.display = isVisible ? 'none' : 'block';
       overlay.style.display = isVisible ? 'none' : 'block';
+      selectedCountBtn.style.display = isVisible ? 'block' : 'none';
 
       if (!isVisible) {
         updateSelectedDishes();
@@ -235,6 +293,7 @@
     function closeResultBox() {
       document.getElementById('resultBox').style.display = 'none';
       document.querySelector('.overlay').style.display = 'none';
+      document.querySelector('.selected-count').style.display = 'block';
     }
 
     function updateSelectedDishes() {
